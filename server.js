@@ -26,7 +26,7 @@ const ENABLE_THINKING_MODE = false; // Set to true to enable chat_template_kwarg
 const DEFAULT_MAX_TOKENS = 9024;     // Used only when the app doesn't send its own max_tokens
 const MAX_RETRIES = 2;               // How many times to retry the SAME model on a temporary error
 const RETRY_BASE_DELAY_MS = 1500;    // Wait before 1st retry (doubles each time)
-const REQUEST_TIMEOUT_MS = 180000;   // Give up if NVIDIA goes silent for 3 minutes
+const REQUEST_TIMEOUT_MS = 300000;   // Give up if NVIDIA goes silent for 5 minutes
 const ENABLE_FALLBACK = false;        // If the chosen model keeps failing, try the backup model below
 const FALLBACK_MODEL = 'meta/llama-3.1-70b-instruct'; // Backup model (128k context)
 
@@ -58,7 +58,7 @@ const nim = axios.create({
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-const NETWORK_ERRORS = ['ECONNRESET', 'ETIMEDOUT', 'ECONNABORTED', 'EAI_AGAIN', 'ENOTFOUND', 'EPIPE'];
+const NETWORK_ERRORS = ['ECONNRESET', 'ETIMEDOUT', 'EAI_AGAIN', 'ENOTFOUND', 'EPIPE'];
 const RETRYABLE_STATUS = [408, 429, 500, 502, 503, 504];
 
 // Temporary problems worth retrying on the same model
